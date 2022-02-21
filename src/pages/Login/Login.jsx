@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import "./login.css";
 
 const Login = () => {
   const [dataUser, setDataUser] = useState({
@@ -28,22 +29,27 @@ const Login = () => {
     login(dispatch, dataUser);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      {errors && <p>All inputs are required</p>}
-      <input
-        type="text"
-        name="username"
-        placeholder="username"
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="password"
-        onChange={handleChange}
-      />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="container">
+      <div className="containerform">
+        <p>Login</p>
+        <form onSubmit={handleSubmit}>
+          {errors && <p className="error">All inputs are required</p>}
+          <input
+            type="text"
+            name="username"
+            placeholder="username"
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

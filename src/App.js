@@ -8,6 +8,7 @@ import NewProduct from "./pages/NewProduct/NewProduct";
 import User from "./pages/User/User";
 import Login from "./pages/Login/Login";
 import { ProtectedRoutes } from "./helpers/ProtectedRoutes";
+import "./App.css";
 
 function App() {
   return (
