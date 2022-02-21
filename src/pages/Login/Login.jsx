@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/apiCalls";
 
 const Login = () => {
   const [dataUser, setDataUser] = useState({
-    name: "",
+    username: "",
     password: "",
   });
   const [errors, setErrors] = useState(false);
+  /*
+   *Vamos a importar el dispatch para poder pasarselo al redux como payload*/
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setDataUser({
@@ -15,11 +20,12 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (dataUser.name === "" || dataUser.password === "") {
+    if (dataUser.username === "" || dataUser.password === "") {
       setErrors(true);
       return;
     }
     setErrors(false);
+    login(dispatch, dataUser);
   };
   return (
     <form onSubmit={handleSubmit}>
