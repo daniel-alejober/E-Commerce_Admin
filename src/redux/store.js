@@ -13,11 +13,11 @@
     <Provider store={store}>
      <PersistGate loading={null} persistor={persistor}>
       <App />
+      </PersistGate>
     </Provider>
 *</React.StrictMode>
  */
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import cartRedux from "./cartRedux";
+import { configureStore } from "@reduxjs/toolkit";
 import userRedux from "./userRedux";
 
 /*
@@ -41,15 +41,11 @@ const persistConfig = {
   version: 1,
   storage,
 };
-/*
- *combinamos los reducers, asi tanto la sesion como los articulos que esten en el
- *carrito se van a quedar*/
-const rootReducer = combineReducers({ user: userRedux, cart: cartRedux });
 
 /*
  *Vamos a indicar que valores queremos que sean persistentes
  */
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, userRedux);
 
 /*
  *Aqui estamos exportando los reducer de cada respectivo archivo para que sean colocados globalmente
