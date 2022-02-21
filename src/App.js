@@ -8,6 +8,7 @@ import ProductList from "./pages/ProductList/ProductList";
 import Product from "./pages/Product/Product";
 import NewProduct from "./pages/NewProduct/NewProduct";
 import User from "./pages/User/User";
+import Login from "./pages/Login/Login";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <div className="container">
           <Sidebar />
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/users" element={<UserList />} />
             <Route path="/user/:userId" element={<User />} />
             <Route path="/newUser" element={<NewUser />} />
