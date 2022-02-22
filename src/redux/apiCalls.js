@@ -1,4 +1,4 @@
-import { clienteAxiosPublic } from "../helpers/axios";
+import { clienteAxios } from "../helpers/axios";
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 
 /*
@@ -12,7 +12,7 @@ import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
-    const res = await clienteAxiosPublic.post("auth/login", user);
+    const res = await clienteAxios.post("auth/login", user);
     dispatch(loginSuccess(res.data));
   } catch (error) {
     dispatch(loginFailure(error.response.data.msg));

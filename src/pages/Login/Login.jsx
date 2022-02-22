@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import { useSelector } from "react-redux";
 import "./login.css";
 
 const Login = () => {
@@ -12,6 +14,16 @@ const Login = () => {
   /*
    *Vamos a importar el dispatch para poder pasarselo al redux como payload*/
   const dispatch = useDispatch();
+
+  /*estamos usando redux */
+  const userAdmin = useSelector((state) => state.user.currentUser);
+
+  let admin = false;
+  if (userAdmin !== null) {
+    admin = userAdmin.isAdmin;
+  }
+
+  let navigate = useNavigate();
 
   const handleChange = (e) => {
     setDataUser({
@@ -27,6 +39,10 @@ const Login = () => {
     }
     setErrors(false);
     login(dispatch, dataUser);
+
+    if (admin) {
+      navigate("/home");
+    }
   };
   return (
     <div className="container">

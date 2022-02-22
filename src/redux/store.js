@@ -17,7 +17,7 @@
     </Provider>
 *</React.StrictMode>
  */
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userRedux from "./userRedux";
 
 /*
@@ -43,9 +43,11 @@ const persistConfig = {
 };
 
 /*
- *Vamos a indicar que valores queremos que sean persistentes
+ *Vamos a indicar que valores queremos que sean persistentes y convinar reducers, 
+ !y le temos que dar un nombre para que puedo encontrarlos el redux
  */
-const persistedReducer = persistReducer(persistConfig, userRedux);
+const rootReducer = combineReducers({ user: userRedux });
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 /*
  *Aqui estamos exportando los reducer de cada respectivo archivo para que sean colocados globalmente
