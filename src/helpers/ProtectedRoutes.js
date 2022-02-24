@@ -11,7 +11,6 @@ export const ProtectedRoutes = () => {
   if (userAdmin !== null) {
     admin = userAdmin.isAdmin;
   }
-  console.log(admin);
   if (admin) {
     <Navigate to="/home" />;
     return (

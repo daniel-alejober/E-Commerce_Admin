@@ -1,4 +1,4 @@
-import { clienteAxios } from "../helpers/axios";
+import clienteAxios from "../helpers/axios";
 import { loginFailure, loginStart, loginSuccess } from "./userRedux";
 
 /*
