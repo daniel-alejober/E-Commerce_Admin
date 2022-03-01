@@ -28,7 +28,7 @@ input {
   outline: none;
   margin: 2rem 0;
 }
-button {
+.buttonLogin {
   background-color: #1f92ee;
   color: #fff;
   border: 1px solid #849cb3;
@@ -45,5 +45,5 @@ button {
   padding: 1rem 0;
   width: 80%;
   margin: 0 auto;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }

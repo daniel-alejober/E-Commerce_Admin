@@ -2,7 +2,7 @@ import React from "react";
 
 const WidgetOrders = ({ order }) => {
   const Button = ({ type }) => {
-    return <button className={type}>{type}</button>;
+    return <button className={`widgetLgStatusButton ${type}`}>{type}</button>;
   };
   return (
     <tr className="widgetLgTr">

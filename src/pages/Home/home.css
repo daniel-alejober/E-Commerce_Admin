@@ -1,6 +1,9 @@
 .home {
   flex: 4;
 }
+.homeData{
+  padding-top: 370px;
+}
 
 .homeWidgets {
   display: flex;

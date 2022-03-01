@@ -62,7 +62,9 @@ const Login = () => {
             placeholder="password"
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
+          <button className="buttonLogin" type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
