@@ -48,7 +48,7 @@ const Login = () => {
     <div className="containerLogin">
       <div className="containerform">
         <p>Login</p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="formLogin">
           {errors && <p className="error">All inputs are required</p>}
           <input
             type="text"
