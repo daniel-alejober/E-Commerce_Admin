@@ -10,6 +10,7 @@ export default function WidgetSm() {
 
   const [users, setUsers] = useState([]);
 
+  /*Esta url la especificamos en el back en el query */
   useEffect(() => {
     const getUsers = async () => {
       try {

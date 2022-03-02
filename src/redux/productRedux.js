@@ -47,7 +47,7 @@ const userSlice = createSlice({
        *pero debemos encontrar el indice del elemento que queremos eleminar con findIndex()
        */
       state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload.id),
+        state.products.findIndex((item) => item._id === action.payload),
         1
       );
     },

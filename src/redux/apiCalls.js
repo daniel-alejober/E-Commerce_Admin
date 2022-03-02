@@ -41,10 +41,12 @@ export const getProducts = async (dispatch) => {
 
 /*
  * Borrar un producto*/
-export const deleteProducts = async (dispatch) => {
+export const deleteProduct = async (id, dispatch, token) => {
   dispatch(deleteProductStart());
   try {
-    const res = await clienteAxios.get("products");
+    const res = await clienteAxios.delete(`products/${id}`, {
+      headers: { token: `Bearer ${token}` },
+    });
     dispatch(deleteProductSuccess(res.data));
   } catch (error) {
     dispatch(deleteProductFailure(error.response.data.msg));

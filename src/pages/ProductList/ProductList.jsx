@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
-import { getProducts } from "../../redux/apiCalls";
+import { deleteProduct, getProducts } from "../../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 /*
  *Estamos importando el dispatch para poder pasarlo por parametro,
@@ -11,17 +10,17 @@ import { useDispatch, useSelector } from "react-redux";
 import "./productList.css";
 
 export default function ProductList() {
-  const [data, setData] = useState(productRows);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  console.log(products);
+  const token = useSelector((state) => state.user.currentUser.accessToken);
 
+  /*Obtener todos los productos */
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    deleteProduct(id, dispatch, token);
   };
 
   const columns = [
@@ -59,7 +58,7 @@ export default function ProductList() {
             <DeleteOutline
               style={{ fontSize: 30 }}
               className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
