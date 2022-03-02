@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const WidgetOrders = ({ order }) => {
   const Button = ({ type }) => {
     return <button className={`widgetLgStatusButton ${type}`}>{type}</button>;

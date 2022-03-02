@@ -8,7 +8,6 @@ export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
   /*estamos usando redux */
   const token = useSelector((state) => state.user.currentUser.accessToken);
-  console.log(orders);
   useEffect(() => {
     const getOrders = async () => {
       try {
