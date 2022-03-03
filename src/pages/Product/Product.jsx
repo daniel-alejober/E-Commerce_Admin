@@ -1,18 +1,62 @@
+import React, { useState, useMemo, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Chart from "../../components/chart/Chart";
-import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import clienteAxios from "../../helpers/axios";
 import "./product.css";
 
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
-
+  /*estamos usando redux para poder optener el token*/
+  const token = useSelector((state) => state.user.currentUser.accessToken);
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
   );
-  console.log(product);
+
+  /*
+   *Vamos a usar useMeno esta es la sintaxis useMemo(() => first, [second])*/
+  const [pStats, setPStats] = useState([]);
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await clienteAxios.get(`orders/income?pid=${productId}`, {
+          headers: { token: `Bearer ${token}` },
+        });
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        list.map((item) =>
+          setPStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], Sales: item.total },
+          ])
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStats();
+  }, [productId, MONTHS, token]);
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -23,7 +67,7 @@ export default function Product() {
       </div>
       <div className="productTop">
         <div className="productTopLeft">
-          <Chart data={productData} dataKey="Sales" title="Sales Performance" />
+          <Chart data={pStats} dataKey="Sales" title="Sales Performance" />
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">

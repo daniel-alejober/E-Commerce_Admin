@@ -7,6 +7,12 @@ import {
   deleteProductFailure,
   deleteProductSuccess,
   deleteProductStart,
+  updateProductFailure,
+  updateProductSuccess,
+  updateProductStart,
+  addProductFailure,
+  addProductSuccess,
+  addProductStart,
 } from "./productRedux";
 
 /*
@@ -50,5 +56,31 @@ export const deleteProduct = async (id, dispatch, token) => {
     dispatch(deleteProductSuccess(res.data));
   } catch (error) {
     dispatch(deleteProductFailure(error.response.data.msg));
+  }
+};
+/*
+ * Actualizar un producto*/
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductStart());
+  try {
+    // const res = await clienteAxios.put(`products/${id}`, {
+    //   headers: { token: `Bearer ${token}` },
+    // });
+    dispatch(updateProductSuccess({ id, product }));
+  } catch (error) {
+    dispatch(updateProductFailure(error.response.data.msg));
+  }
+};
+/*
+ * Agregar un producto*/
+export const addProduct = async (product, dispatch, token) => {
+  dispatch(addProductStart());
+  try {
+    const res = await clienteAxios.post(`products/`, product, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(addProductSuccess(res.data));
+  } catch (error) {
+    dispatch(addProductFailure(error.response.data.msg));
   }
 };
